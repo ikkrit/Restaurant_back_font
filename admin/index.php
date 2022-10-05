@@ -1,6 +1,6 @@
 <!---------------------------- MENU --------------------------------------> 
 
-<?php include 'components/_admin_menu.php' ?>
+<?php include 'components/_admin_menu.php'; ?>
  
 <!---------------------------- MAIN -------------------------------------->   
  
@@ -41,4 +41,4 @@
 
 <!--------------------------- FOOTER ------------------------------------->
  
-<?php include 'components/_admin_footer.php' ?>
+<?php include 'components/_admin_footer.php'; ?>
