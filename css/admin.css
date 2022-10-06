@@ -78,6 +78,22 @@ table tr td {
     background-color: #ff4757;
 }
 
+.success {
+    display: inline;
+    background-color: #2ed573;
+    padding: 1%;
+    color: #fff;
+    font-weight: bold;
+}
+
+.error {
+    display: inline;
+    background-color: #ff4757;
+    padding: 1%;
+    color: #fff;
+    font-weight: bold;
+}
+
 /******* MENU *******/
 
 .menu {

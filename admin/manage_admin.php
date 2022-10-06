@@ -16,9 +16,23 @@
             <?php
 
                 if(isset($_SESSION['add'])) {
+
                     echo $_SESSION['add'];
                     unset($_SESSION['add']);
                 }
+
+                if(isset($_SESSION['delete'])) {
+
+                    echo $_SESSION['delete'];
+                    unset($_SESSION['delete']);
+                }
+
+                if(isset($_SESSION['update'])) {
+
+                    echo $_SESSION['update'];
+                    unset($_SESSION['update']);
+                }
+
 
             ?>
 
@@ -56,8 +70,9 @@
                                 <td><?=$full_name;?></td>
                                 <td><?=$username;?></td>
                                 <td>
-                                    <a href="#" class="btn-secondary">Update Admin</a>
-                                    <a href="#" class="btn-danger">Delete Admin</a>
+                                    <a href="<?=SITEURL;?>admin/update_password.php?id=<?=$id;?>" class="btn-primary">Change Password</a>
+                                    <a href="<?=SITEURL;?>admin/update_admin.php?id=<?=$id;?>" class="btn-secondary">Update Admin</a>
+                                    <a href="<?=SITEURL;?>admin/delete_admin.php?id=<?=$id;?>" class="btn-danger">Delete Admin</a>
                                 </td>
                             </tr>
 
