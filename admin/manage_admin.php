@@ -1,3 +1,5 @@
+<?php include '../config/constants.php'; ?>
+
 <!---------------------------- MENU -------------------------------------->  
 
 <?php include 'components/_admin_menu.php'; ?>
@@ -9,7 +11,18 @@
         <div class="wrapper">
             <h1>Manage Admin</h1>
 
-            <br><br>
+            <br>
+
+            <?php
+
+                if(isset($_SESSION['add'])) {
+                    echo $_SESSION['add'];
+                    unset($_SESSION['add']);
+                }
+
+            ?>
+
+            <br><br><br>
 
             <a href="add_admin.php" class="btn-primary">Add Admin</a>
 
@@ -23,35 +36,39 @@
                     <th>Actions</th>
                 </tr>
 
-                <tr>
-                    <td>1. </td>
-                    <td>Vijay Thapas</td>
-                    <td>vijaythapa</td>
-                    <td>
-                        <a href="#" class="btn-secondary">Update Admin</a>
-                        <a href="#" class="btn-danger">Delete Admin</a>
-                    </td>
-                </tr>
+                <?php
+                    $sql = "SELECT * FROM tbl_admin";
+                    $res = mysqli_query($conn, $sql);
+                    $sn = 1;
 
-                <tr>
-                    <td>2. </td>
-                    <td>Vijay Thapas</td>
-                    <td>vijaythapa</td>
-                    <td>
-                        <a href="#" class="btn-secondary">Update Admin</a>
-                        <a href="#" class="btn-danger">Delete Admin</a>
-                    </td>
-                </tr>
+                    if($res == true) {
+                        $count = mysqli_num_rows($res);
 
-                <tr>
-                    <td>3. </td>
-                    <td>Vijay Thapas</td>
-                    <td>vijaythapa</td>
-                    <td>
-                        <a href="#" class="btn-secondary">Update Admin</a>
-                        <a href="#" class="btn-danger">Delete Admin</a>
-                    </td>
-                </tr>
+                        if($count > 0) {
+                            while($rows=mysqli_fetch_assoc($res)) {
+                                $id = strip_tags($rows['id']);
+                                $full_name = strip_tags($rows['full_name']);
+                                $username = strip_tags($rows['username']);
+
+                            ?>
+                            <tr>
+                                <td><?=$sn++;?>.</td>
+                                <td><?=$full_name;?></td>
+                                <td><?=$username;?></td>
+                                <td>
+                                    <a href="#" class="btn-secondary">Update Admin</a>
+                                    <a href="#" class="btn-danger">Delete Admin</a>
+                                </td>
+                            </tr>
+
+                            <?php
+
+                            }
+                        } else {
+
+                        }
+                    }
+                ?>
 
             </table>
         </div>

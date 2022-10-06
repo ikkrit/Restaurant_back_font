@@ -1,3 +1,5 @@
+<?php include '../config/constants.php'; ?>
+
 <!---------------------------- MENU --------------------------------------> 
 
 <?php include 'components/_admin_menu.php'; ?>

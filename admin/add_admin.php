@@ -1,3 +1,5 @@
+<?php include '../config/constants.php'; ?>
+
 <?php
 
     if(isset($_POST['submit'])) {
@@ -11,9 +13,21 @@
             username='$username',
             password='$password'";
 
-        $conn = mysqli_connect('localhost', 'root', '') or die(mysqli_error($e));
-        $db_select = mysqli_select_db($conn, 'food-order') or die(mysqli_error($e));
         $res = mysqli_query($conn, $sql) or die(mysqli_error($e));
+
+        if($res == true) {
+
+            $_SESSION['add'] = "Admin Added Successfully";
+            // Redirect Manage Admin
+            header("Location:".SITEURL.'admin/manage_admin.php');
+
+        } else {
+
+            $_SESSION['add'] = "Failed to Add Admin";
+            // Redirect Manage Admin
+            header("Location:".SITEURL.'admin/add_admin.php');
+
+        }
         
     } 
 
@@ -31,6 +45,15 @@
             <h1>Add Admin</h1>
 
             <br><br>
+
+            <?php
+
+                if(isset($_SESSION['add'])) {
+                    echo $_SESSION['add'];
+                    unset($_SESSION['add']);
+                }
+
+            ?>
 
             <form action="" method="POST">
 
