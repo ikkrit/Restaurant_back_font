@@ -1,31 +1,4 @@
-<?php
-
-    include '../config/constants.php';
-
-    if(isset($_POST['submit'])) {
-
-        $username = strip_tags($_POST['username']);
-        $password = strip_tags($_POST['password']);
-
-        $sql = "SELECT * FROM tbl_admin WHERE username='$username' AND password='$password'";
-
-        $res = mysqli_query($conn, $sql);
-
-        $count = mysqli_num_rows($res);
-
-        if($count == 1) {
-
-            $_SESSION['login'] = "<div class='success'>Login Successful.</div>";
-            header('Location:'.SITEURL.'admin/');
-        } else {
-
-            $_SESSION['login'] = "<div class='error'>Username or Password did not Match.</div>";
-            header('Location:'.SITEURL.'admin/login_admin.php');
-        }
-
-    }
-
-?>
+<?php include '../config/constants.php';?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -42,7 +15,7 @@
     <div class="login">
         <h1 class="text-center">Login</h1>
 
-        <br>
+        <br><br>
 
         <?php
             if(isset($_SESSION['login'])) {
@@ -52,7 +25,7 @@
             }
         ?>
 
-        <br>
+        <br><br>
 
         <form action="" method="POST" class="text-center">
 
@@ -76,3 +49,32 @@
     
 </body>
 </html>
+
+<?php
+
+    if(isset($_POST['submit'])) {
+
+        $username = strip_tags($_POST['username']);
+        $password = strip_tags(md5($_POST['password']));
+    
+        $sql = "SELECT * FROM tbl_admin WHERE username='$username' AND password='$password'";
+    
+        $res = mysqli_query($conn, $sql);
+    
+        $count = mysqli_num_rows($res);
+    
+        if($count == 1) {
+    
+            $_SESSION['login'] = "<div class='success'>Login Successful.</div>";
+            header('Location:'.SITEURL.'admin/');
+        } else {
+    
+            $_SESSION['login'] = "<div class='error'>Username or Password did not Match.</div>";
+            header('Location:'.SITEURL.'admin/login_admin.php');
+        }
+    
+    }
+
+?>
+
+
