@@ -135,3 +135,12 @@ table tr td {
     background-color: #ff4757;
     color: #fff;
 }
+
+/****** LOGIN ******/
+
+.login {
+    border: 1px solid gray;
+    width: 60%;
+    margin: 10% auto;
+    padding: 2%;
+}
