@@ -13,7 +13,7 @@
 
             <br><br>
 
-            <a href="" class="btn-primary">Add Category</a>
+            <a href="<?=SITEURL;?>admin/add_category.php" class="btn-primary">Add Category</a>
 
             <br><br><br>
 
