@@ -79,7 +79,8 @@ table tr td {
 }
 
 .success {
-    display: inline;
+    width: 60%;
+    margin: auto;
     background-color: #2ed573;
     padding: 1%;
     color: #fff;
@@ -87,7 +88,8 @@ table tr td {
 }
 
 .error {
-    display: inline;
+    width: 60%;
+    margin: auto;
     background-color: #ff4757;
     padding: 1%;
     color: #fff;

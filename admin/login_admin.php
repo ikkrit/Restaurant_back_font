@@ -23,6 +23,12 @@
                 echo $_SESSION['login'];
                 unset($_SESSION['login']);
             }
+
+            if(isset($_SESSION['no-login-message'])) {
+
+                echo $_SESSION['no-login-message'];
+                unset($_SESSION['no-login-message']);
+            }
         ?>
 
         <br><br>
@@ -65,11 +71,13 @@
     
         if($count == 1) {
     
-            $_SESSION['login'] = "<div class='success'>Login Successful.</div>";
+            $_SESSION['login'] = "<div class='success text-center'>Login Successful.</div>";
+            $_SESSION['user'] = $username;
+
             header('Location:'.SITEURL.'admin/');
         } else {
     
-            $_SESSION['login'] = "<div class='error'>Username or Password did not Match.</div>";
+            $_SESSION['login'] = "<div class='error text-center'>Username or Password did not Match.</div>";
             header('Location:'.SITEURL.'admin/login_admin.php');
         }
     
