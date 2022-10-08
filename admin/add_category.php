@@ -1,5 +1,35 @@
 <?php include '../config/constants.php'; ?>
 
+<?php
+
+    if(isset($_POST['submit'])) {
+
+        $title = strip_tags($_POST['title']);
+
+        if(isset($_POST['featured'])) {
+
+            $featured = strip_tags($_POST['featured']);
+
+        } else {
+
+            $featured = "No";
+
+        }
+
+        if(isset($_POST['active'])) {
+
+            $active = strip_tags($_POST['active']);
+
+        } else {
+
+            
+
+        }
+
+    }
+
+?>
+
 <!---------------------------- MENU --------------------------------------> 
 
 <?php include 'components/_admin_menu.php'; ?>
