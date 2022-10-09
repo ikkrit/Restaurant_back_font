@@ -88,19 +88,24 @@
 
             $image_name = strip_tags($_FILES['image']['name']);
 
-            $ext = end(explode('.', $image_name));
-            $image_name = "Food_Category_".rand(000,999).'.'.$ext;
+            if($image_name != "") {
 
-            $source_path = strip_tags($_FILES['image']['tmp_name']);
-            $destination_path = "../img/category/".$image_name;
+                $ext = end(explode('.', $image_name));
+                
+                $image_name = "Food_Category_".rand(000,999).'.'.$ext;
 
-            $upload = move_uploaded_file($source_path, $destination_path);
+                $source_path = strip_tags($_FILES['image']['tmp_name']);
 
-            if($upload == false) {
+                $destination_path = "../img/category/".$image_name;
 
-                $_SESSION['upload'] = "<div class='error text-center'>Failed to Upload Image. </div>";
-                header('Location:'.SITEURL.'admin/add_category.php');
-                die();
+                $upload = move_uploaded_file($source_path, $destination_path);
+
+                if($upload == false) {
+
+                    $_SESSION['upload'] = "<div class='error text-center'>Failed to Upload Image. </div>";
+                    header('Location:'.SITEURL.'admin/add_category.php');
+                    die();
+                }
             }
 
         } else {
