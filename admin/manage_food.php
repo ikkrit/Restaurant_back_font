@@ -25,6 +25,24 @@
                     unset($_SESSION['add']);
                 }
 
+                if(isset($_SESSION['delete'])) {
+
+                    echo $_SESSION['delete'];
+                    unset($_SESSION['delete']);
+                }
+
+                if(isset($_SESSION['upload'])) {
+
+                    echo $_SESSION['upload'];
+                    unset($_SESSION['upload']);
+                }
+
+                if(isset($_SESSION['unauthorize'])) {
+
+                    echo $_SESSION['unauthorize'];
+                    unset($_SESSION['unauthorize']);
+                }
+
             ?>
 
             <table class="tbl-full">
@@ -78,8 +96,8 @@
                                     <td><?=$featured;?></td>
                                     <td><?=$active;?></td>
                                     <td>
-                                        <a href="#" class="btn-secondary">Update Food</a>
-                                        <a href="#" class="btn-danger">Delete Food</a>
+                                        <a href="<?=SITEURL;?>admin/update_food.php?id=<?=$id;?>" class="btn-secondary">Update Food</a>
+                                        <a href="<?=SITEURL;?>admin/delete_food.php?id=<?=$id;?>&image_name=<?=$image_name;?>" class="btn-danger">Delete Food</a>
                                     </td>
                                 </tr>
                             <?php
