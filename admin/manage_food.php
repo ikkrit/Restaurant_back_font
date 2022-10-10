@@ -13,7 +13,7 @@
 
             <br><br>
 
-            <a href="" class="btn-primary">Add Food</a>
+            <a href="<?=SITEURL;?>admin/add_food.php" class="btn-primary">Add Food</a>
 
             <br><br><br>
 
