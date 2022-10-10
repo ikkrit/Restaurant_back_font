@@ -147,9 +147,10 @@
 
                         if($image_name != "") {
 
-                            $ext = end(explode('.', $image_name));
+                            $ext = explode('.', $image_name);
+                            $ext_file = end($ext);
 
-                            $image_name = "Food-Name".rand(000,999).".".$ext;
+                            $image_name = "Food-Name-".rand(000,999).'.'.$ext_file;
 
                             $src = strip_tags($_FILES['image']['tmp_name']);
 
@@ -174,15 +175,17 @@
                     }
 
                     $sql2 = "INSERT INTO tbl_food SET
-                        title = '$title',
-                        description = '$description',
-                        price = $price,
-                        image_name = '$image_name'
-                        category_id = $category,
-                        featured = '$featured',
-                        active = '$active'";
+                        title='$title',
+                        description='$description',
+                        price=$price,
+                        image_name='$image_name',
+                        category_id=$category,
+                        featured='$featured',
+                        active='$active'";
+
 
                     $res2 = mysqli_query($conn, $sql2);
+                    
 
                     if($res2 == true) {
 
@@ -195,7 +198,6 @@
                         header('Location:'.SITEURL.'admin/manage_food.php');
 
                     }
-
 
                 }
 

@@ -17,43 +17,80 @@
 
             <br><br><br>
 
+            <?php
+
+                if(isset($_SESSION['add'])) {
+
+                    echo $_SESSION['add'];
+                    unset($_SESSION['add']);
+                }
+
+            ?>
+
             <table class="tbl-full">
                 <tr>
                     <th>S.N</th>
-                    <th>Full Name</th>
-                    <th>Username</th>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Image</th>
+                    <th>Featured</th>
+                    <th>Active</th>
                     <th>Actions</th>
                 </tr>
 
-                <tr>
-                    <td>1. </td>
-                    <td>Vijay Thapas</td>
-                    <td>vijaythapa</td>
-                    <td>
-                        <a href="#" class="btn-secondary">Update Admin</a>
-                        <a href="#" class="btn-danger">Delete Admin</a>
-                    </td>
-                </tr>
+                <?php
 
-                <tr>
-                    <td>2. </td>
-                    <td>Vijay Thapas</td>
-                    <td>vijaythapa</td>
-                    <td>
-                        <a href="#" class="btn-secondary">Update Admin</a>
-                        <a href="#" class="btn-danger">Delete Admin</a>
-                    </td>
-                </tr>
+                    $sql = "SELECT * FROM tbl_food";
 
-                <tr>
-                    <td>3. </td>
-                    <td>Vijay Thapas</td>
-                    <td>vijaythapa</td>
-                    <td>
-                        <a href="#" class="btn-secondary">Update Admin</a>
-                        <a href="#" class="btn-danger">Delete Admin</a>
-                    </td>
-                </tr>
+                    $res = mysqli_query($conn, $sql);
+
+                    $count = mysqli_num_rows($res);
+
+                    $sn = 1;
+
+                    if($count > 0) {
+
+                        while($row = mysqli_fetch_assoc($res)) {
+
+                            $id = strip_tags($row['id']);
+                            $title = strip_tags($row['title']);
+                            $price = strip_tags($row['price']);
+                            $image_name = strip_tags($row['image_name']);
+                            $featured = strip_tags($row['featured']);
+                            $active = strip_tags($row['active']);
+
+                            ?>
+                                <tr>
+                                    <td><?=$sn++;?></td>
+                                    <td><?=$title;?></td>
+                                    <td><?=$price;?>€</td>
+                                    <td>
+                                        <?php
+                                            if($image_name == "") {
+                                                echo "<div class='error'>Image not Added.</div>";
+                                            } else {
+                                                ?>
+                                                    <img src="<?=SITEURL;?>img/food/<?=$image_name;?>" alt="<?=$title;?>" width="100px">
+                                                <?php
+                                            }
+                                        ?>
+                                    </td>
+                                    <td><?=$featured;?></td>
+                                    <td><?=$active;?></td>
+                                    <td>
+                                        <a href="#" class="btn-secondary">Update Food</a>
+                                        <a href="#" class="btn-danger">Delete Food</a>
+                                    </td>
+                                </tr>
+                            <?php
+                        }
+
+                    } else {
+
+                        echo "<tr><td colspan='7' class='error'> Food not Added Yet. </td></tr>";
+                    }
+
+                ?>
 
             </table>
         </div>
