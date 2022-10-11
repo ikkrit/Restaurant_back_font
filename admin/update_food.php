@@ -173,7 +173,7 @@
         $current_image = strip_tags($_POST['current_image']);
         $category = strip_tags($_POST['category']);
 
-        $featured = strip_tags($_POST['$featured']);
+        $featured = strip_tags($_POST['featured']);
         $active = strip_tags($_POST['active']);
 
         if(isset($_FILES['image']['name'])) {
@@ -182,15 +182,68 @@
 
             if($image_name != "") {
 
-                $ext = end(explode('.', $image_name));
 
-                $image_name = "Food-Name-".rand(000,999).'.'.$ext;
+
+                $ext = explode('.', $image_name);
+                $ext_file = end($ext);
+
+                $image_name = "Food-Name-".rand(000,999).'.'.$ext_file;
+
+                $src_path = $_FILES['image']['tmp_name'];
+                $dest_path = "../img/food/".$image_name;
+
+                $upload = move_uploaded_file($src_path, $dest_path);
+
+                if($upload == false) {
+
+                    $_SESSION['upload'] = "<div class='error'>Failed to Upload new Image.</div>";
+                    header('Location:'.SITEURL.'admin/manage_food.php');
+                    die();
+                }
+
+                if($current_image != "") {
+
+                    $remove_path = "../img/food/".$current_image;
+
+                    $remove = unlink($remove_path);
+
+                    if($remove == false) {
+
+                        $_SESSION['remove-failed'] = "<div class='error'>Faile to remove current image.</div>";
+                        header('Location:'.SITEURL.'admin/manage_food.php');
+                        die();
+                    }
+
+                }
 
             }
 
         } else {
 
             $image_name = $current_image;
+        }
+
+        $sql3 = "UPDATE tbl_food SET
+            title = '$title',
+            description = '$description',
+            price = $price,
+            image_name = '$image_name',
+            category_id = '$category',
+            featured = '$featured',
+            active = '$active'
+            WHERE id=$id";
+
+        $res3 = mysqli_query($conn, $sql3);
+
+        if($res3 == true) {
+
+            $_SESSION['update'] = "<div class='success'>Food Updated Successfully.</div>";
+            header('Location:'.SITEURL.'admin/manage_food.php');
+
+        } else {
+
+            $_SESSION['update'] = "<div class='error'>Failed to Update Food.</div>";
+            header('Location:'.SITEURL.'admin/manage_food.php');
         }
 
     }
