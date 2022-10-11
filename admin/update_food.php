@@ -1,3 +1,5 @@
+<?php ob_start(); ?>
+
 <?php include '../config/constants.php'; ?>
 
 <?php 
@@ -249,3 +251,5 @@
     }
 
 ?>
+
+<?php ob_end_flush();?>

@@ -16,29 +16,53 @@
         <div class="container">
             <h2 class="text-center">Explore Foods</h2>
 
-            <a href="category-foods.html">
-            <div class="box-3 float-container">
-                <img src="img/pizza.jpg" alt="Pizza" class="img-responsive img-curve">
+            <?php
 
-                <h3 class="float-text text-white">Pizza</h3>
-            </div>
-            </a>
+                $sql = "SELECT * FROM tbl_category WHERE active='Yes' AND featured='Yes' LIMIT 3";
 
-            <a href="#">
-            <div class="box-3 float-container">
-                <img src="img/burger.jpg" alt="Burger" class="img-responsive img-curve">
+                $res = mysqli_query($conn, $sql);
 
-                <h3 class="float-text text-white">Burger</h3>
-            </div>
-            </a>
+                $count = mysqli_num_rows($res);
 
-            <a href="#">
-            <div class="box-3 float-container">
-                <img src="img/momo.jpg" alt="Momo" class="img-responsive img-curve">
+                if($count > 0) {
 
-                <h3 class="float-text text-white">Momo</h3>
-            </div>
-            </a>
+                    while($row = mysqli_fetch_assoc($res)) {
+
+                        $id = strip_tags($row['id']);
+                        $title = strip_tags($row['title']);
+                        $image_name = strip_tags($row['image_name']);
+                        ?>
+
+                        <a href="<?=SITEURL;?>category-foods.php">
+                            <div class="box-3 float-container">
+                                <?php
+
+                                    if($image_name == "") {
+                                        echo "<div class='error'>Image not Available</div>";
+                                    } else {
+
+                                        ?>
+                                            <img src="<?=SITEURL;?>img/category/<?=$image_name;?>" alt="<?=$title;?>" class="img-responsive img-curve">
+                                        <?php
+
+                                    }
+
+                                ?>
+
+                                <h3 class="float-text text-white"><?=$title;?></h3>
+                            </div>
+                        </a>
+
+                        <?php
+                    }
+
+                } else {
+
+                    echo "<div class=''error'>Category not Added.</div>";
+
+                }
+
+            ?>
 
             <div class="clearfix"></div>
         </div>
@@ -50,107 +74,50 @@
         <div class="container">
             <h2 class="text-center">Food Menu</h2>
 
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="img/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
-                </div>
+            <?php
 
-                <div class="food-menu-desc">
-                    <h4>Food Title</h4>
-                    <p class="food-price">$2.3</p>
-                    <p class="food-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
+                $sql2 = "SELECT * FROM tbl_food WHERE active='Yes' AND featured='Yes' LIMIT 6";
 
-                    <a href="order.html" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
+                $res2 = mysqli_query($conn, $sql2);
 
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="img/menu-burger.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
-                </div>
+                $count2 = mysqli_num_rows($res2);
 
-                <div class="food-menu-desc">
-                    <h4>Smoky Burger</h4>
-                    <p class="food-price">$2.3</p>
-                    <p class="food-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
+                if($count2 > 0) {
 
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
+                    while($row = mysqli_fetch_assoc($res2)) {
 
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="img/menu-burger.jpg" alt="Chicke Hawain Burger" class="img-responsive img-curve">
-                </div>
+                        $id = strip_tags($row['id']);
+                        $title = strip_tags($row['title']);
+                        $price = strip_tags($row['price']);
+                        $description = strip_tags($row['description']);
+                        $image_name = strip_tags($row['image_name']);
+                        ?>
 
-                <div class="food-menu-desc">
-                    <h4>Nice Burger</h4>
-                    <p class="food-price">$2.3</p>
-                    <p class="food-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
+                            <div class="food-menu-box">
+                                <div class="food-menu-img">
+                                    <img src="img/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
+                                </div>
 
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
+                                <div class="food-menu-desc">
+                                    <h4><?=$title;?></h4>
+                                    <p class="food-price"><?=$price;?> €</p>
+                                    <p class="food-detail"><?=$description;?></p>
+                                    <br>
 
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="img/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
-                </div>
+                                    <a href="order.html" class="btn btn-primary">Order Now</a>
+                                </div>
+                            </div>
+                        <?php
 
-                <div class="food-menu-desc">
-                    <h4>Food Title</h4>
-                    <p class="food-price">$2.3</p>
-                    <p class="food-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
+                    }
 
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
+                } else {
 
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="img/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
-                </div>
+                    echo "<div class='error'>Food not available.</div>";
 
-                <div class="food-menu-desc">
-                    <h4>Food Title</h4>
-                    <p class="food-price">$2.3</p>
-                    <p class="food-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
+                }
 
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
-
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="img/menu-momo.jpg" alt="Chicke Hawain Momo" class="img-responsive img-curve">
-                </div>
-
-                <div class="food-menu-desc">
-                    <h4>Chicken Steam Momo</h4>
-                    <p class="food-price">$2.3</p>
-                    <p class="food-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
-
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
+            ?>
 
 
             <div class="clearfix"></div>

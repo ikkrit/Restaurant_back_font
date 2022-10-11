@@ -12,102 +12,51 @@
         <div class="container">
             <h2 class="text-center">Explore Foods</h2>
 
-            <a href="category-foods.html">
-            <div class="box-3 float-container">
-                <img src="img/pizza.jpg" alt="Pizza" class="img-responsive img-curve">
+            <?php
 
-                <h3 class="float-text text-white">Pizza</h3>
-            </div>
-            </a>
+                $sql = "SELECT * FROM tbl_category WHERE active='Yes'";
 
-            <a href="#">
-            <div class="box-3 float-container">
-                <img src="img/burger.jpg" alt="Burger" class="img-responsive img-curve">
+                $res = mysqli_query($conn, $sql);
 
-                <h3 class="float-text text-white">Burger</h3>
-            </div>
-            </a>
+                $count = mysqli_num_rows($res);
 
-            <a href="#">
-            <div class="box-3 float-container">
-                <img src="img/momo.jpg" alt="Momo" class="img-responsive img-curve">
+                if($count > 0) {
 
-                <h3 class="float-text text-white">Momo</h3>
-            </div>
-            </a>
+                    while($row = mysqli_fetch_assoc($res)) {
 
-            <a href="#">
-            <div class="box-3 float-container">
-                <img src="img/pizza.jpg" alt="Pizza" class="img-responsive img-curve">
+                        $id = strip_tags($row['id']);
+                        $title = strip_tags($row['title']);
+                        $image_name = strip_tags($row['image_name']);
+                        ?>
+                            <a href="<?=SITEURL;?>category-foods.php">
+                            <div class="box-3 float-container">
+                                <?php
 
-                <h3 class="float-text text-white">Pizza</h3>
-            </div>
-            </a>
+                                    if($image_name == "") {
 
-            <a href="#">
-            <div class="box-3 float-container">
-                <img src="img/burger.jpg" alt="Burger" class="img-responsive img-curve">
+                                        echo "<div class='error'>Category not found.</div>";
 
-                <h3 class="float-text text-white">Burger</h3>
-            </div>
-            </a>
+                                    } else {
 
-            <a href="#">
-            <div class="box-3 float-container">
-                <img src="img/momo.jpg" alt="Momo" class="img-responsive img-curve">
+                                        ?>
+                                            <img src="<?=SITEURL;?>img/category/<?=$image_name;?>" alt="<?=$title;?>" class="img-responsive img-curve">
+                                        <?php
 
-                <h3 class="float-text text-white">Momo</h3>
-            </div>
-            </a>
-            <a href="#">
-            <div class="box-3 float-container">
-                <img src="img/pizza.jpg" alt="Pizza" class="img-responsive img-curve">
+                                    }
+                                ?>
 
-                <h3 class="float-text text-white">Pizza</h3>
-            </div>
-            </a>
+                                <h3 class="float-text text-white"><?=$title;?></h3>
+                            </div>
+                            </a>
 
-            <a href="#">
-            <div class="box-3 float-container">
-                <img src="img/burger.jpg" alt="Burger" class="img-responsive img-curve">
+                        <?php
+                    }
 
-                <h3 class="float-text text-white">Burger</h3>
-            </div>
-            </a>
+                } else {
+                    echo "<div class='error'>Category not found.</div>";
+                }
 
-            <a href="#">
-            <div class="box-3 float-container">
-                <img src="img/momo.jpg" alt="Momo" class="img-responsive img-curve">
-
-                <h3 class="float-text text-white">Momo</h3>
-            </div>
-            </a>
-
-            <a href="#">
-            <div class="box-3 float-container">
-                <img src="img/pizza.jpg" alt="Pizza" class="img-responsive img-curve">
-
-                <h3 class="float-text text-white">Pizza</h3>
-            </div>
-            </a>
-
-            <a href="#">
-            <div class="box-3 float-container">
-                <img src="img/burger.jpg" alt="Burger" class="img-responsive img-curve">
-
-                <h3 class="float-text text-white">Burger</h3>
-            </div>
-            </a>
-
-            <a href="#">
-            <div class="box-3 float-container">
-                <img src="img/momo.jpg" alt="Momo" class="img-responsive img-curve">
-
-                <h3 class="float-text text-white">Momo</h3>
-            </div>
-            </a>
-
-            
+            ?>
 
             <div class="clearfix"></div>
         </div>
