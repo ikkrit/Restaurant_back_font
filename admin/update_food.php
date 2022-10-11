@@ -12,13 +12,13 @@
 
         $row2 = mysqli_fetch_assoc($res2);
 
-        $title = strip_tags($row['title']);
-        $description = strip_tags($row['description']);
-        $price = strip_tags($row['price']);
-        $current_image = strip_tags($row['image_name']);
-        $current_category = strip_tags($row['category_id']);
-        $featured = strip_tags($row['featured']);
-        $active = strip_tags($row['active']);
+        $title = strip_tags($row2['title']);
+        $description = strip_tags($row2['description']);
+        $price = strip_tags($row2['price']);
+        $current_image = strip_tags($row2['image_name']);
+        $current_category = strip_tags($row2['category_id']);
+        $featured = strip_tags($row2['featured']);
+        $active = strip_tags($row2['active']);
 
     } else {
 
@@ -52,18 +52,34 @@
                     <tr>
                         <td>Description: </td>
                         <td>
-                            <textarea name="description" id="" cols="30" rows="5"></textarea>
+                            <textarea name="description" cols="30" rows="5"><?=$description;?></textarea>
                         </td>
                     </tr>
 
                     <tr>
                         <td>Price: </td>
-                        <td><Input type="number" name="price"></td>
+                        <td><Input type="number" name="price" value="<?=$price;?>"></td>
                     </tr>
 
                     <tr>
-                        <td>Current Image:</td>
-                        <td>Display the image if Available</td>
+                        <td>Current Image: </td>
+                        <td>
+                            <?php
+
+                                if($current_image == "") {
+
+                                    echo "<div class='error'>Image not Available.</div>";
+
+                                } else {
+
+                                    ?>
+                                    <img src="<?=SITEURL;?>img/food/<?=$current_image;?>" alt="<?=$title;?>" width="150px">
+                                    <?php
+
+                                }
+
+                            ?>
+                        </td>
                     </tr>
 
                     <tr>
@@ -93,7 +109,7 @@
 
                                             ?>
 
-                                            <option value="<?=$category_id;?>"><?=$category_title;?></option>
+                                            <option <?php if($current_category == $category_id){echo "selected";} ?>value="<?=$category_id;?>"><?=$category_title;?></option>
 
                                             <?php
                                         }
@@ -112,21 +128,26 @@
                     <tr>
                         <td>Featured: </td>
                         <td>
-                            <input type="radio" name="featured" value="Yes"> Yes
-                            <input type="radio" name="featured" value="No"> No
+                            <input <?php if($featured == "Yes"){echo "checked";} ?> type="radio" name="featured" value="Yes"> Yes
+                            <input <?php if($featured == "No"){echo "checked";} ?> type="radio" name="featured" value="No"> No
                         </td>
                     </tr>
 
                     <tr>
                         <td>Active: </td>
                         <td>
-                            <input type="radio" name="active" value="Yes"> Yes
-                            <input type="radio" name="active" value="No"> No
+                            <input <?php if($active == "Yes"){echo "checked";} ?> type="radio" name="active" value="Yes"> Yes
+                            <input <?php if($featured == "No"){echo "checked";} ?> type="radio" name="active" value="No"> No
                         </td>
                     </tr>
 
                     <tr>
-                        <td><input type="submit" name="submit" value="Update Food" class="btn-secondary"></td>
+                        <td>
+                            <input type="hidden" name="id" value="<?=$id;?>">
+                            <input type="hidden" name="current_image" value="<?=$current_image;?>">
+
+                            <input type="submit" name="submit" value="Update Food" class="btn-secondary">
+                        </td>
                     </tr>
 
                 </table>
@@ -140,3 +161,38 @@
 <!--------------------------- FOOTER ------------------------------------->
  
 <?php include 'components/_admin_footer.php'; ?>
+
+<?php
+
+    if(isset($_POST['submit'])) {
+
+        $id = strip_tags($_POST['id']);
+        $title = strip_tags($_POST['title']);
+        $description = strip_tags($_POST['description']);
+        $price = strip_tags($_POST['price']);
+        $current_image = strip_tags($_POST['current_image']);
+        $category = strip_tags($_POST['category']);
+
+        $featured = strip_tags($_POST['$featured']);
+        $active = strip_tags($_POST['active']);
+
+        if(isset($_FILES['image']['name'])) {
+
+            $image_name = strip_tags($_FILES['image']['name']);
+
+            if($image_name != "") {
+
+                $ext = end(explode('.', $image_name));
+
+                $image_name = "Food-Name-".rand(000,999).'.'.$ext;
+
+            }
+
+        } else {
+
+            $image_name = $current_image;
+        }
+
+    }
+
+?>
