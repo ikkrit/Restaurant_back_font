@@ -95,7 +95,21 @@
 
                             <div class="food-menu-box">
                                 <div class="food-menu-img">
-                                    <img src="img/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
+                                    <?php
+                                        if($image_name == "") {
+
+                                            echo "<div class='error'>Image not available.</div>";
+
+                                        } else {
+
+                                            ?>
+
+                                                <img src="<?=SITEURL;?>img/food/<?=$image_name;?>" alt="<?=$title;?>" class="img-responsive img-curve" height="100px">
+
+                                            <?php
+
+                                        }
+                                    ?>
                                 </div>
 
                                 <div class="food-menu-desc">
@@ -104,7 +118,7 @@
                                     <p class="food-detail"><?=$description;?></p>
                                     <br>
 
-                                    <a href="order.html" class="btn btn-primary">Order Now</a>
+                                    <a href="<?=SITEURL;?>order.php" class="btn btn-primary">Order Now</a>
                                 </div>
                             </div>
                         <?php
@@ -127,7 +141,7 @@
         </div>
 
         <p class="text-center">
-            <a href="#">See All Foods</a>
+            <a href="<?=SITEURL;?>foods.php">See All Foods</a>
         </p>
     </section>
     

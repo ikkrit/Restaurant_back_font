@@ -16,112 +16,69 @@
         <div class="container">
             <h2 class="text-center">Food Menu</h2>
 
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="img/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
-                </div>
+            <?php
 
-                <div class="food-menu-desc">
-                    <h4>Food Title</h4>
-                    <p class="food-price">$2.3</p>
-                    <p class="food-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
+                $sql = "SELECT * FROM tbl_food WHERE active='Yes'";
 
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
+                $res = mysqli_query($conn, $sql);
 
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="img/menu-burger.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
-                </div>
+                $count = mysqli_num_rows($res);
 
-                <div class="food-menu-desc">
-                    <h4>Smoky Burger</h4>
-                    <p class="food-price">$2.3</p>
-                    <p class="food-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
+                if($count > 0) {
 
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
+                    while($row = mysqli_fetch_assoc($res)) {
 
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="img/menu-burger.jpg" alt="Chicke Hawain Burger" class="img-responsive img-curve">
-                </div>
+                        $id = strip_tags($row['id']);
+                        $title = strip_tags($row['title']);
+                        $description = strip_tags($row['description']);
+                        $price = strip_tags($row['price']);
+                        $image_name = strip_tags($row['image_name']);
 
-                <div class="food-menu-desc">
-                    <h4>Nice Burger</h4>
-                    <p class="food-price">$2.3</p>
-                    <p class="food-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
+                        ?>
+                            <div class="food-menu-box">
+                                <div class="food-menu-img">
 
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
+                                    <?php
 
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="img/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
-                </div>
+                                        if($image_name == "") {
 
-                <div class="food-menu-desc">
-                    <h4>Food Title</h4>
-                    <p class="food-price">$2.3</p>
-                    <p class="food-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
+                                            echo "<div class='error'>Image not Available.</div>";
 
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
+                                        } else {
 
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="img/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
-                </div>
+                                            ?>
 
-                <div class="food-menu-desc">
-                    <h4>Food Title</h4>
-                    <p class="food-price">$2.3</p>
-                    <p class="food-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
+                                                <img src="<?=SITEURL;?>img/food/<?=$image_name;?>" alt="<?=$title;?>" class="img-responsive img-curve" height="100px">
 
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
+                                            <?php
 
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="img/menu-momo.jpg" alt="Chicke Hawain Momo" class="img-responsive img-curve">
-                </div>
+                                        }
 
-                <div class="food-menu-desc">
-                    <h4>Chicken Steam Momo</h4>
-                    <p class="food-price">$2.3</p>
-                    <p class="food-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
+                                    ?>
 
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
+                                </div>
 
+                                <div class="food-menu-desc">
+                                    <h4><?=$title;?></h4>
+                                    <p class="food-price"><?=$price;?> €</p>
+                                    <p class="food-detail"><?=$description;?></p>
+                                    <br>
 
-            <div class="clearfix"></div>
+                                    <a href="#" class="btn btn-primary">Order Now</a>
+                                </div>
+                            </div>
 
-            
+                        <?php
+                    }
+
+                } else {
+
+                    echo "<div class='error'>Food not found.</div>";
+
+                }
+            ?>
+
+            <div class="clearfix"></div>      
 
         </div>
 

@@ -218,6 +218,9 @@
 
                 }
 
+            } else {
+                
+                $image_name = $current_image;
             }
 
         } else {
