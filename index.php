@@ -33,7 +33,7 @@
                         $image_name = strip_tags($row['image_name']);
                         ?>
 
-                        <a href="<?=SITEURL;?>category-foods.php">
+                        <a href="<?=SITEURL;?>category-foods.php?category_id=<?=$id;?>">
                             <div class="box-3 float-container">
                                 <?php
 
