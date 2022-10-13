@@ -12,6 +12,15 @@
 
 <!---------------------------- CATEGORIES -------------------------------------->
 
+<?php
+
+    if(isset($_SESSION['order'])) {
+        echo $_SESSION['order'];
+        unset($_SESSION['order']);
+    }
+
+?>
+
     <section class="categories">
         <div class="container">
             <h2 class="text-center">Explore Foods</h2>
@@ -118,7 +127,7 @@
                                     <p class="food-detail"><?=$description;?></p>
                                     <br>
 
-                                    <a href="<?=SITEURL;?>order.php" class="btn btn-primary">Order Now</a>
+                                    <a href="<?=SITEURL;?>order.php?food_id=<?=$id;?>" class="btn btn-primary">Order Now</a>
                                 </div>
                             </div>
                         <?php

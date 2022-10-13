@@ -86,6 +86,24 @@ fieldset{
     border-radius: 5px;
 }
 
+.success {
+    width: 30%;
+    margin: 1% auto;
+    background-color: #2ed573;
+    padding: 1%;
+    color: #fff;
+    font-weight: bold;
+}
+
+.error {
+    width: 30%;
+    margin: 1% auto;
+    background-color: #ff4757;
+    padding: 1%;
+    color: #fff;
+    font-weight: bold;
+}
+
 
 /* CSSS for navbar section */
 

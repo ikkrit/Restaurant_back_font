@@ -56,6 +56,7 @@
 
                     while($row2 = mysqli_fetch_assoc($res2)) {
 
+                        $id = strip_tags($row2['id']);
                         $title = strip_tags($row2['title']);
                         $price = strip_tags($row2['price']);
                         $description = strip_tags($row2['description']);
