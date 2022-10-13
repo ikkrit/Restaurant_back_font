@@ -13,7 +13,7 @@
 
             <?php
 
-                $search = strip_tags($_POST['search']);
+                $search = mysqli_real_escape_string($conn, $_POST['search']);
 
             ?>
             

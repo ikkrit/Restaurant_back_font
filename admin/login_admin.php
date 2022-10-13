@@ -60,8 +60,9 @@
 
     if(isset($_POST['submit'])) {
 
-        $username = strip_tags($_POST['username']);
-        $password = strip_tags(md5($_POST['password']));
+        $username = mysqli_real_escape_string($conn, $_POST['username']);
+        $raw_password = strip_tags(md5($_POST['password']));
+        $password = mysqli_real_escape_string($conn, $raw_password);
     
         $sql = "SELECT * FROM tbl_admin WHERE username='$username' AND password='$password'";
     
