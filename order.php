@@ -118,9 +118,17 @@
                     $order_date = date("Y-m-d h:i:s");
                     $status = "Ordered";
 
-                    $customer_name = strip_tags($_POST['full_name']);
+                    $mail = strip_tags($_POST['full_name']);
                     $customer_contact = strip_tags($_POST['contact']);
+                    
                     $customer_email = strip_tags($_POST['email']);
+                    if(filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+                        $customer_email = $mail;
+                    } else {
+                        $_SESSION['mail'] = "<div class='error text-center'>Mail Invalid.</div>";
+                        header('Location:'.SITEURL.'order.php');
+                    }
+
                     $customer_address = strip_tags($_POST['address']);
 
                     $sql2 = "INSERT INTO tbl_order SET

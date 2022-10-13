@@ -13,6 +13,16 @@
 
             <br><br><br>
 
+            <?php
+                if(isset($_SESSION['update'])) {
+
+                    echo $_SESSION['update'];
+                    unset($_SESSION['update']);
+                }
+            ?>
+
+            <br><br>
+
             <table class="tbl-full">
                 <tr>
                     <th>S.N</th>
@@ -31,7 +41,7 @@
 
                 <?php
 
-                    $sql = "SELECT * FROM tbl_order";
+                    $sql = "SELECT * FROM tbl_order ORDER BY id DESC";
 
                     $res = mysqli_query($conn, $sql);
 
@@ -64,13 +74,27 @@
                                     <td><?=$qty;?></td>
                                     <td><?=$total;?></td>
                                     <td><?=$order_date;?></td>
-                                    <td><?=$status;?></td>
+
+                                    <td>
+                                        <?php
+                                            if($status == "Ordered") {
+                                                echo "<label style='color: blue;'>$status</label>";
+                                            } elseif($status == "On Delivery") {
+                                                echo "<label style='color: orange;'>$status</label>";
+                                            } elseif($status == "Delivered") {
+                                                echo "<label style='color: green;'>$status</label>";
+                                            } elseif($status == "Cancelled") {
+                                                echo "<label style='color: red;'>$status</label>";
+                                            }
+                                        ?>
+                                    </td>
+
                                     <td><?=$customer_name;?></td>
                                     <td><?=$customer_contact;?></td>
                                     <td><?=$customer_email?></td>
                                     <td><?=$customer_address;?></td>
                                     <td>
-                                        <a href="#" class="btn-secondary">Update Order</a>
+                                        <a href="<?=SITEURL;?>admin/update_order.php?id=<?=$id;?>" class="btn-secondary">Update Order</a>
                                     </td>
                                 </tr>
 
