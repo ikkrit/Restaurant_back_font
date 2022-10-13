@@ -16,40 +16,75 @@
             <table class="tbl-full">
                 <tr>
                     <th>S.N</th>
-                    <th>Full Name</th>
-                    <th>Username</th>
+                    <th>Fodd</th>
+                    <th>Price</th>
+                    <th>Qty</th>
+                    <th>Total</th>
+                    <th>Order Date</th>
+                    <th>Status</th>
+                    <th>Customer Name</th>
+                    <th>Customer Contact</th>
+                    <th>Email</th>
+                    <th>Address</th>
                     <th>Actions</th>
                 </tr>
 
-                <tr>
-                    <td>1. </td>
-                    <td>Vijay Thapas</td>
-                    <td>vijaythapa</td>
-                    <td>
-                        <a href="#" class="btn-secondary">Update Admin</a>
-                        <a href="#" class="btn-danger">Delete Admin</a>
-                    </td>
-                </tr>
+                <?php
 
-                <tr>
-                    <td>2. </td>
-                    <td>Vijay Thapas</td>
-                    <td>vijaythapa</td>
-                    <td>
-                        <a href="#" class="btn-secondary">Update Admin</a>
-                        <a href="#" class="btn-danger">Delete Admin</a>
-                    </td>
-                </tr>
+                    $sql = "SELECT * FROM tbl_order";
 
-                <tr>
-                    <td>3. </td>
-                    <td>Vijay Thapas</td>
-                    <td>vijaythapa</td>
-                    <td>
-                        <a href="#" class="btn-secondary">Update Admin</a>
-                        <a href="#" class="btn-danger">Delete Admin</a>
-                    </td>
-                </tr>
+                    $res = mysqli_query($conn, $sql);
+
+                    $count = mysqli_num_rows($res);
+
+                    $sn = 1;
+
+                    if($count > 0) {
+
+                        while($row = mysqli_fetch_assoc($res)) {
+
+                            $id = strip_tags($row['id']);
+                            $food = strip_tags($row['food']);
+                            $price = strip_tags($row['price']);
+                            $qty = strip_tags($row['qty']);
+                            $total = strip_tags($row['total']);
+                            $order_date = strip_tags($row['order_date']);
+                            $status = strip_tags($row['status']);
+                            $customer_name = strip_tags($row['customer_name']);
+                            $customer_contact = strip_tags($row['customer_contact']);
+                            $customer_email = strip_tags($row['customer_email']);
+                            $customer_address = strip_tags($row['customer_address']);
+
+                            ?>
+
+                                <tr>
+                                    <td><?=$sn++;?>. </td>
+                                    <td><?=$food;?></td>
+                                    <td><?=$price;?></td>
+                                    <td><?=$qty;?></td>
+                                    <td><?=$total;?></td>
+                                    <td><?=$order_date;?></td>
+                                    <td><?=$status;?></td>
+                                    <td><?=$customer_name;?></td>
+                                    <td><?=$customer_contact;?></td>
+                                    <td><?=$customer_email?></td>
+                                    <td><?=$customer_address;?></td>
+                                    <td>
+                                        <a href="#" class="btn-secondary">Update Order</a>
+                                    </td>
+                                </tr>
+
+                            <?php
+
+                        }
+
+                    } else {
+
+                        echo "<tr><td colspan='12' class='error'>Orders not Available</td></tr>";
+
+                    }
+
+                ?>
 
             </table>
         </div>
